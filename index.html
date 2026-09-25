@@ -105,12 +105,12 @@ function vistaPrevia() {
   // =========================
   function caja(y, texto, fontSize = 20) {
     ctx.lineWidth = 2;
-    ctx.strokeRect(68, y, 147, 32);
+    ctx.strokeRect(68, y, 130, 32);
 
     ctx.font = `500 ${fontSize}px Arial`;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(texto, 141.5, y + 16);
+    ctx.fillText(texto, 133, y + 16);
 
     ctx.textBaseline = "alphabetic";
   }
@@ -209,15 +209,15 @@ function vistaPrevia() {
 
   new QRCode(qrContenedor, {
     text: datosEtiqueta.qr,
-    width: 145,
-    height: 145,
+    width: 160,
+    height: 160,
     correctLevel: QRCode.CorrectLevel.M
   });
 
   const qrCanvas = qrContenedor.querySelector("canvas");
 
   if (qrCanvas) {
-    ctx.drawImage(qrCanvas, 231, 14, 145, 145);
+    ctx.drawImage(qrCanvas, 216, 8, 160, 160);
   }
 
   // =========================
@@ -226,7 +226,7 @@ function vistaPrevia() {
   ctx.fillStyle = "black";
   ctx.font = "900 italic 11px Arial";
   ctx.textAlign = "center";
-  ctx.fillText("SCAN SERVICE HISTORY", 303, 181);
+  ctx.fillText("SCAN SERVICE HISTORY", 303, 218);
 
   ctx.textAlign = "start";
 
