@@ -177,30 +177,41 @@ function vistaPrevia() {
   // =========================
   // ACEITERA
   // =========================
-  ctx.lineWidth = 3;
+// ACEITERA
+ctx.fillStyle = "black";
 
-  ctx.beginPath();
-  ctx.moveTo(16, 201);
-  ctx.lineTo(26, 193);
-  ctx.lineTo(47, 197);
-  ctx.lineTo(55, 207);
-  ctx.lineTo(27, 207);
-  ctx.closePath();
-  ctx.fill();
+// cuerpo
+ctx.beginPath();
+ctx.moveTo(18, 196);
+ctx.lineTo(47, 196);
+ctx.lineTo(54, 204);
+ctx.lineTo(48, 211);
+ctx.lineTo(20, 211);
+ctx.lineTo(14, 204);
+ctx.closePath();
+ctx.fill();
 
-  ctx.beginPath();
-  ctx.moveTo(46, 197);
-  ctx.lineTo(59, 192);
-  ctx.lineTo(61, 196);
-  ctx.lineTo(51, 201);
-  ctx.fill();
+// asa
+ctx.lineWidth = 3;
+ctx.beginPath();
+ctx.arc(27, 195, 8, Math.PI, 0);
+ctx.stroke();
 
-  // gota
-  ctx.beginPath();
-  ctx.moveTo(58, 211);
-  ctx.quadraticCurveTo(64, 201, 68, 211);
-  ctx.quadraticCurveTo(64, 221, 58, 211);
-  ctx.fill();
+// pico
+ctx.beginPath();
+ctx.moveTo(47, 198);
+ctx.lineTo(62, 191);
+ctx.lineTo(64, 195);
+ctx.lineTo(52, 203);
+ctx.closePath();
+ctx.fill();
+
+// gota
+ctx.beginPath();
+ctx.moveTo(65, 205);
+ctx.quadraticCurveTo(71, 213, 65, 218);
+ctx.quadraticCurveTo(59, 213, 65, 205);
+ctx.fill();
 
   // =========================
   // QR
