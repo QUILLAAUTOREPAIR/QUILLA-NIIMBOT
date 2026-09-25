@@ -85,7 +85,9 @@ ctx.fillText("Millaje: " + datosEtiqueta.millaje, 20, 115);
 ctx.fillText("Fecha: " + datosEtiqueta.fecha, 20, 150);
 ctx.fillText("Aceite: " + datosEtiqueta.aceite, 20, 185);
 
-    estado.textContent = "Etiqueta preparada";
+estado.textContent = "Enviando etiqueta a la B1...";
+await Niimbot.printImage(canvas);
+estado.textContent = "Etiqueta impresa";
 
   } catch (error) {
     estado.textContent = "Error: " + error.message;
