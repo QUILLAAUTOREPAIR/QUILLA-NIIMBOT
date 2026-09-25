@@ -11,7 +11,7 @@
 
   <button onclick="conectar()">CONECTAR B1</button>
   <p id="estado">Lista para conectar</p>
-
+<p id="datos">Esperando datos de Google Sheets...</p>
   <script src="https://iscarelli.github.io/niimbot-web-bluetooth/src/niimbot.js"></script>
 
   <script>
@@ -35,6 +35,26 @@
         estado.textContent = "Error: " + error.message;
       }
     }
+
+    async function cargarDatos() {
+  const datos = document.getElementById("datos");
+
+  try {
+    const respuesta = await fetch("https://script.google.com/macros/s/AKfycbwxck0wYYL8yLzdZrFMfbuVcR6Wwr9CU4pdt4QS13Lcv3qNPmWFEdFHv_Xs-pzmtTgd/exec?json=1");
+    const d = await respuesta.json();
+
+    datos.innerHTML =
+      "Consecutivo: " + d.consecutivo + "<br>" +
+      "Placa: " + d.placa + "<br>" +
+      "Millaje: " + d.millaje + "<br>" +
+      "Fecha: " + d.fecha + "<br>" +
+      "Aceite: " + d.aceite;
+  } catch (error) {
+    datos.textContent = "Error cargando datos: " + error.message;
+  }
+}
+
+cargarDatos();
   </script>
 </body>
 </html>
