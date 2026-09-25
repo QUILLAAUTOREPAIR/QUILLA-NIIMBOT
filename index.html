@@ -18,6 +18,7 @@
         style="border:1px solid black; width:384px; height:240px;"></canvas>
   <script src="https://iscarelli.github.io/niimbot-web-bluetooth/src/niimbot.js"></script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
     let datosEtiqueta = null;
     async function conectar() {
@@ -114,10 +115,21 @@ ctx.fillText("◆", 20, 207);
 ctx.font = "bold 22px Arial";
 ctx.fillText(datosEtiqueta.aceite, 65, 207);
 
-// Área reservada para QR
-ctx.strokeStyle = "black";
-ctx.lineWidth = 2;
-ctx.strokeRect(280, 75, 88, 88);
+// QR real del historial
+const qrContenedor = document.createElement("div");
+
+new QRCode(qrContenedor, {
+  text: datosEtiqueta.qr,
+  width: 88,
+  height: 88,
+  correctLevel: QRCode.CorrectLevel.M
+});
+
+const qrCanvas = qrContenedor.querySelector("canvas");
+
+if (qrCanvas) {
+  ctx.drawImage(qrCanvas, 280, 75, 88, 88);
+}
 
 ctx.font = "bold 11px Arial";
 ctx.fillText("SCAN SERVICE", 279, 180);
