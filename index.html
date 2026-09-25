@@ -61,7 +61,7 @@
   }
 }
 
-    function vistaPrevia() {
+function vistaPrevia() {
   const estado = document.getElementById("estado");
 
   if (!datosEtiqueta) {
@@ -75,68 +75,136 @@
 
   const ctx = canvas.getContext("2d");
 
+  // Fondo
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, 384, 240);
 
-ctx.fillStyle = "black";
+  ctx.fillStyle = "black";
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 2;
 
-// Encabezado
-ctx.font = "bold italic 38px Arial";
-ctx.fillText("QUILLA", 18, 42);
+  // ===== LOGO / ENCABEZADO =====
+  ctx.font = "bold italic 38px Arial";
+  ctx.fillText("QUILLA", 12, 38);
 
-ctx.font = "bold italic 18px Arial";
-ctx.fillText("AUTO REPAIR", 25, 62);
+  ctx.font = "bold italic 15px Arial";
+  ctx.fillText("AUTO REPAIR", 48, 56);
 
-// Consecutivo
-ctx.font = "bold 30px Arial";
-ctx.fillText("#", 18, 103);
+  // ===== CAJAS DE DATOS =====
+  function caja(y, texto) {
+    ctx.lineWidth = 2;
+    ctx.strokeRect(62, y, 158, 36);
 
-ctx.font = "bold 22px Arial";
-ctx.fillText(datosEtiqueta.consecutivo, 65, 100);
+    ctx.font = "bold 20px Arial";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(texto, 141, y + 18);
 
-// Próximo millaje
-ctx.font = "bold 22px Arial";
-ctx.fillText("◉", 20, 137);
+    ctx.textAlign = "start";
+    ctx.textBaseline = "alphabetic";
+  }
 
-ctx.font = "bold 22px Arial";
-ctx.fillText(datosEtiqueta.millaje, 65, 137);
+  caja(66, datosEtiqueta.consecutivo);
+  caja(108, datosEtiqueta.millaje);
+  caja(150, datosEtiqueta.fecha);
+  caja(192, datosEtiqueta.aceite);
 
-// Fecha
-ctx.font = "bold 22px Arial";
-ctx.fillText("▣", 20, 171);
+  // ===== ICONO # =====
+  ctx.font = "bold 36px Arial";
+  ctx.fillText("#", 18, 96);
 
-ctx.font = "bold 20px Arial";
-ctx.fillText(datosEtiqueta.fecha, 65, 171);
+  // ===== ICONO ODÓMETRO =====
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.arc(37, 126, 19, Math.PI, 0);
+  ctx.stroke();
 
-// Aceite
-ctx.font = "bold 22px Arial";
-ctx.fillText("◆", 20, 207);
+  ctx.beginPath();
+  ctx.moveTo(37, 126);
+  ctx.lineTo(50, 116);
+  ctx.stroke();
 
-ctx.font = "bold 22px Arial";
-ctx.fillText(datosEtiqueta.aceite, 65, 207);
+  ctx.beginPath();
+  ctx.arc(37, 126, 4, 0, Math.PI * 2);
+  ctx.fill();
 
-// QR real del historial
-const qrContenedor = document.createElement("div");
+  // Marcas del odómetro
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(19, 122); ctx.lineTo(24, 123);
+  ctx.moveTo(23, 112); ctx.lineTo(27, 116);
+  ctx.moveTo(37, 107); ctx.lineTo(37, 113);
+  ctx.moveTo(51, 112); ctx.lineTo(47, 116);
+  ctx.moveTo(55, 122); ctx.lineTo(50, 123);
+  ctx.stroke();
 
-new QRCode(qrContenedor, {
-  text: datosEtiqueta.qr,
-  width: 88,
-  height: 88,
-  correctLevel: QRCode.CorrectLevel.M
-});
+  // ===== ICONO CALENDARIO =====
+  ctx.lineWidth = 3;
+  ctx.strokeRect(19, 158, 37, 29);
 
-const qrCanvas = qrContenedor.querySelector("canvas");
+  ctx.beginPath();
+  ctx.moveTo(19, 166);
+  ctx.lineTo(56, 166);
+  ctx.stroke();
 
-if (qrCanvas) {
-  ctx.drawImage(qrCanvas, 280, 75, 88, 88);
-}
+  ctx.fillRect(26, 171, 6, 5);
+  ctx.fillRect(36, 171, 6, 5);
+  ctx.fillRect(46, 171, 6, 5);
+  ctx.fillRect(26, 179, 6, 5);
+  ctx.fillRect(36, 179, 6, 5);
+  ctx.fillRect(46, 179, 6, 5);
 
-ctx.font = "bold 11px Arial";
-ctx.fillText("SCAN SERVICE", 279, 180);
-ctx.fillText("HISTORY", 298, 194);
+  // ===== ICONO ACEITE =====
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(18, 213);
+  ctx.lineTo(26, 203);
+  ctx.lineTo(46, 207);
+  ctx.lineTo(53, 218);
+  ctx.lineTo(27, 218);
+  ctx.closePath();
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(46, 207);
+  ctx.lineTo(58, 203);
+  ctx.stroke();
+
+  // Gota
+  ctx.beginPath();
+  ctx.moveTo(55, 220);
+  ctx.quadraticCurveTo(61, 211, 65, 220);
+  ctx.quadraticCurveTo(61, 229, 55, 220);
+  ctx.fill();
+
+  // ===== QR =====
+  const qrContenedor = document.createElement("div");
+
+  new QRCode(qrContenedor, {
+    text: datosEtiqueta.qr,
+    width: 142,
+    height: 142,
+    correctLevel: QRCode.CorrectLevel.M
+  });
+
+  const qrCanvas = qrContenedor.querySelector("canvas");
+
+  if (qrCanvas) {
+    ctx.drawImage(qrCanvas, 234, 12, 142, 142);
+  }
+
+  // ===== TEXTO QR =====
+  ctx.font = "bold italic 14px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText("SCAN SERVICE", 305, 178);
+  ctx.fillText("HISTORY", 305, 195);
+
+  ctx.textAlign = "start";
 
   estado.textContent = "Vista previa lista";
 }
+
+    
     async function imprimirEtiqueta() {
   const estado = document.getElementById("estado");
 
