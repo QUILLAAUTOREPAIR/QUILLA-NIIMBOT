@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Quilla NIIMBOT</title>
+</head>
+
+<body>
+  <h1>QUILLA AUTO REPAIR</h1>
+  <h2>NIIMBOT B1</h2>
+
+  <button onclick="conectar()">CONECTAR B1</button>
+  <p id="estado">Lista para conectar</p>
+
+  <script src="https://iscarelli.github.io/niimbot-web-bluetooth/src/niimbot.js"></script>
+
+  <script>
+    async function conectar() {
+      const estado = document.getElementById("estado");
+
+      const model = {
+        name_prefixes: ["B1"],
+        task: "b1",
+        density: 3,
+        label_type: 1,
+        speed: 1
+      };
+
+      try {
+        estado.textContent = "Buscando NIIMBOT...";
+        const info = await Niimbot.identify(model);
+        estado.textContent =
+          "Conectada: " + (info.label || "NIIMBOT B1");
+      } catch (error) {
+        estado.textContent = "Error: " + error.message;
+      }
+    }
+  </script>
+</body>
+</html>
