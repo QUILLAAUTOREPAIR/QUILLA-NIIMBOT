@@ -86,7 +86,26 @@ ctx.fillText("Fecha: " + datosEtiqueta.fecha, 20, 150);
 ctx.fillText("Aceite: " + datosEtiqueta.aceite, 20, 185);
 
 estado.textContent = "Enviando etiqueta a la B1...";
-await Niimbot.printImage(canvas);
+const imagen = canvas.toDataURL("image/png");
+
+const model = {
+  name_prefixes: ["B1"],
+  task: "b1",
+  density: 3,
+  label_type: 1,
+  speed: 1
+};
+
+const size = {
+  w_px: 384,
+  h_px: 240,
+  dpi: 203
+};
+
+await Niimbot.printImage(imagen, {
+  model: model,
+  size: size
+});
 estado.textContent = "Etiqueta impresa";
 
   } catch (error) {
