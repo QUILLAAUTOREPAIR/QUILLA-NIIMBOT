@@ -13,6 +13,8 @@
   <button onclick="imprimirEtiqueta()">IMPRIMIR ETIQUETA</button>
   <p id="estado">Lista para conectar</p>
 <p id="datos">Esperando datos de Google Sheets...</p>
+  <canvas id="previewEtiqueta" width="384" height="240"
+        style="border:1px solid black; width:384px; height:240px;"></canvas>
   <script src="https://iscarelli.github.io/niimbot-web-bluetooth/src/niimbot.js"></script>
 
   <script>
@@ -66,7 +68,7 @@
 }
     estado.textContent = "Preparando etiqueta...";
 
-    const canvas = document.createElement("canvas");
+const canvas = document.createElement("canvas");
     canvas.width = 384;
     canvas.height = 240;
 
