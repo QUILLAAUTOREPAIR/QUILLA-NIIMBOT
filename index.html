@@ -10,6 +10,7 @@
   <h2>NIIMBOT B1</h2>
 
   <button onclick="conectar()">CONECTAR B1</button>
+  <button onclick="vistaPrevia()">VISTA PREVIA</button>
   <button onclick="imprimirEtiqueta()">IMPRIMIR ETIQUETA</button>
   <p id="estado">Lista para conectar</p>
 <p id="datos">Esperando datos de Google Sheets...</p>
@@ -59,6 +60,36 @@
   }
 }
 
+    function vistaPrevia() {
+  const estado = document.getElementById("estado");
+
+  if (!datosEtiqueta) {
+    estado.textContent = "Los datos todavía no están cargados";
+    return;
+  }
+
+  const canvas = document.getElementById("previewEtiqueta");
+  canvas.width = 384;
+  canvas.height = 240;
+
+  const ctx = canvas.getContext("2d");
+
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, 384, 240);
+
+  ctx.fillStyle = "black";
+
+  ctx.font = "bold 28px Arial";
+  ctx.fillText("QUILLA AUTO REPAIR", 20, 40);
+
+  ctx.font = "24px Arial";
+  ctx.fillText("Placa: " + datosEtiqueta.placa, 20, 80);
+  ctx.fillText("Millaje: " + datosEtiqueta.millaje, 20, 115);
+  ctx.fillText("Fecha: " + datosEtiqueta.fecha, 20, 150);
+  ctx.fillText("Aceite: " + datosEtiqueta.aceite, 20, 185);
+
+  estado.textContent = "Vista previa lista";
+}
     async function imprimirEtiqueta() {
   const estado = document.getElementById("estado");
 
