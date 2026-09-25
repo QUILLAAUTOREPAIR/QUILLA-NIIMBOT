@@ -75,129 +75,158 @@ function vistaPrevia() {
 
   const ctx = canvas.getContext("2d");
 
-  // Fondo
   ctx.fillStyle = "white";
   ctx.fillRect(0, 0, 384, 240);
 
   ctx.fillStyle = "black";
   ctx.strokeStyle = "black";
+
+  // =========================
+  // LOGO
+  // =========================
+  ctx.font = "900 italic 40px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText("QUILLA", 112, 39);
+
+  ctx.font = "900 italic 16px Arial";
+  ctx.fillText("AUTO REPAIR", 112, 57);
+
+  // Líneas laterales como el logo original
   ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(13, 53);
+  ctx.lineTo(43, 53);
+  ctx.moveTo(181, 53);
+  ctx.lineTo(212, 53);
+  ctx.stroke();
 
-  // ===== LOGO / ENCABEZADO =====
-  ctx.font = "bold italic 38px Arial";
-  ctx.fillText("QUILLA", 12, 38);
-
-  ctx.font = "bold italic 15px Arial";
-  ctx.fillText("AUTO REPAIR", 48, 56);
-
-  // ===== CAJAS DE DATOS =====
-  function caja(y, texto) {
+  // =========================
+  // CAJAS
+  // =========================
+  function caja(y, texto, fontSize = 20) {
     ctx.lineWidth = 2;
-    ctx.strokeRect(62, y, 158, 36);
+    ctx.strokeRect(68, y, 147, 32);
 
-    ctx.font = "bold 20px Arial";
+    ctx.font = 500 ${fontSize}px Arial;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.fillText(texto, 141, y + 18);
+    ctx.fillText(texto, 141.5, y + 16);
 
-    ctx.textAlign = "start";
     ctx.textBaseline = "alphabetic";
   }
 
-  caja(66, datosEtiqueta.consecutivo);
-  caja(108, datosEtiqueta.millaje);
-  caja(150, datosEtiqueta.fecha);
-  caja(192, datosEtiqueta.aceite);
+  caja(69, datosEtiqueta.consecutivo, 21);
+  caja(108, datosEtiqueta.millaje, 20);
+  caja(147, datosEtiqueta.fecha, 18);
+  caja(186, datosEtiqueta.aceite, 21);
 
-  // ===== ICONO # =====
-  ctx.font = "bold 36px Arial";
-  ctx.fillText("#", 18, 96);
+  // =========================
+  // #
+  // =========================
+  ctx.textAlign = "center";
+  ctx.font = "900 35px Arial";
+  ctx.fillText("#", 38, 96);
 
-  // ===== ICONO ODÓMETRO =====
+  // =========================
+  // ODÓMETRO
+  // =========================
   ctx.lineWidth = 3;
+
   ctx.beginPath();
-  ctx.arc(37, 126, 19, Math.PI, 0);
+  ctx.arc(38, 126, 20, Math.PI, 0);
   ctx.stroke();
 
+  // aguja
   ctx.beginPath();
-  ctx.moveTo(37, 126);
+  ctx.moveTo(38, 126);
   ctx.lineTo(50, 116);
   ctx.stroke();
 
   ctx.beginPath();
-  ctx.arc(37, 126, 4, 0, Math.PI * 2);
+  ctx.arc(38, 126, 4, 0, Math.PI * 2);
   ctx.fill();
 
-  // Marcas del odómetro
+  // marcas
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.moveTo(19, 122); ctx.lineTo(24, 123);
-  ctx.moveTo(23, 112); ctx.lineTo(27, 116);
-  ctx.moveTo(37, 107); ctx.lineTo(37, 113);
-  ctx.moveTo(51, 112); ctx.lineTo(47, 116);
-  ctx.moveTo(55, 122); ctx.lineTo(50, 123);
+  ctx.moveTo(19, 123); ctx.lineTo(25, 124);
+  ctx.moveTo(23, 113); ctx.lineTo(28, 117);
+  ctx.moveTo(38, 106); ctx.lineTo(38, 113);
+  ctx.moveTo(53, 113); ctx.lineTo(48, 117);
+  ctx.moveTo(57, 123); ctx.lineTo(51, 124);
   ctx.stroke();
 
-  // ===== ICONO CALENDARIO =====
+  // =========================
+  // CALENDARIO
+  // =========================
   ctx.lineWidth = 3;
-  ctx.strokeRect(19, 158, 37, 29);
+  ctx.strokeRect(18, 153, 40, 29);
 
   ctx.beginPath();
-  ctx.moveTo(19, 166);
-  ctx.lineTo(56, 166);
+  ctx.moveTo(18, 161);
+  ctx.lineTo(58, 161);
   ctx.stroke();
 
-  ctx.fillRect(26, 171, 6, 5);
-  ctx.fillRect(36, 171, 6, 5);
-  ctx.fillRect(46, 171, 6, 5);
-  ctx.fillRect(26, 179, 6, 5);
-  ctx.fillRect(36, 179, 6, 5);
-  ctx.fillRect(46, 179, 6, 5);
+  ctx.fillRect(24, 166, 7, 5);
+  ctx.fillRect(35, 166, 7, 5);
+  ctx.fillRect(46, 166, 7, 5);
+  ctx.fillRect(24, 174, 7, 5);
+  ctx.fillRect(35, 174, 7, 5);
+  ctx.fillRect(46, 174, 7, 5);
 
-  // ===== ICONO ACEITE =====
+  // =========================
+  // ACEITERA
+  // =========================
   ctx.lineWidth = 3;
+
   ctx.beginPath();
-  ctx.moveTo(18, 213);
-  ctx.lineTo(26, 203);
-  ctx.lineTo(46, 207);
-  ctx.lineTo(53, 218);
-  ctx.lineTo(27, 218);
+  ctx.moveTo(16, 201);
+  ctx.lineTo(26, 193);
+  ctx.lineTo(47, 197);
+  ctx.lineTo(55, 207);
+  ctx.lineTo(27, 207);
   ctx.closePath();
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(46, 207);
-  ctx.lineTo(58, 203);
-  ctx.stroke();
-
-  // Gota
-  ctx.beginPath();
-  ctx.moveTo(55, 220);
-  ctx.quadraticCurveTo(61, 211, 65, 220);
-  ctx.quadraticCurveTo(61, 229, 55, 220);
   ctx.fill();
 
-  // ===== QR =====
+  ctx.beginPath();
+  ctx.moveTo(46, 197);
+  ctx.lineTo(59, 192);
+  ctx.lineTo(61, 196);
+  ctx.lineTo(51, 201);
+  ctx.fill();
+
+  // gota
+  ctx.beginPath();
+  ctx.moveTo(58, 211);
+  ctx.quadraticCurveTo(64, 201, 68, 211);
+  ctx.quadraticCurveTo(64, 221, 58, 211);
+  ctx.fill();
+
+  // =========================
+  // QR
+  // =========================
   const qrContenedor = document.createElement("div");
 
   new QRCode(qrContenedor, {
     text: datosEtiqueta.qr,
-    width: 142,
-    height: 142,
+    width: 145,
+    height: 145,
     correctLevel: QRCode.CorrectLevel.M
   });
 
   const qrCanvas = qrContenedor.querySelector("canvas");
 
   if (qrCanvas) {
-    ctx.drawImage(qrCanvas, 234, 12, 142, 142);
+    ctx.drawImage(qrCanvas, 231, 14, 145, 145);
   }
 
-  // ===== TEXTO QR =====
-  ctx.font = "bold italic 14px Arial";
+  // =========================
+  // SCAN SERVICE HISTORY
+  // =========================
+  ctx.fillStyle = "black";
+  ctx.font = "900 italic 11px Arial";
   ctx.textAlign = "center";
-  ctx.fillText("SCAN SERVICE", 305, 178);
-  ctx.fillText("HISTORY", 305, 195);
+  ctx.fillText("SCAN SERVICE HISTORY", 303, 181);
 
   ctx.textAlign = "start";
 
